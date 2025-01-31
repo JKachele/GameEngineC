@@ -1,0 +1,38 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "src/glad.o",
+      "src/glad.c"
+    ],
+    "directory": "/home/jkachele/Programming/CProjects/ChessEngine/lib/glad",
+    "file": "/home/jkachele/Programming/CProjects/ChessEngine/lib/glad/src/glad.c",
+    "output": "/home/jkachele/Programming/CProjects/ChessEngine/lib/glad/src/glad.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-std=c11",
+      "-O3",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Wno-unused-parameter",
+      "-Wno-unused-variable",
+      "-Ilib/cglm/include",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-o",
+      "src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/jkachele/Programming/CProjects/ChessEngine",
+    "file": "/home/jkachele/Programming/CProjects/ChessEngine/src/main.c",
+    "output": "/home/jkachele/Programming/CProjects/ChessEngine/src/main.o"
+  }
+]
