@@ -1,2 +1,2 @@
-# ChessEngine
-Chess game in C with OpenGL
+# GameEngineC
+Game Engine in C with OpenGL
