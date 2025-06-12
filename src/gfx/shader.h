@@ -19,11 +19,11 @@
 #include "gfx.h"
 
 struct Shader {
-        GLuint shader;
+        GLuint handle;
 };
 
 void shaderInit(struct Shader *self);
-void shaderUpdate(struct Shader *self);
+void shaderUse(struct Shader *self);
 void shaderDestroy(struct Shader *self);
 
 #endif

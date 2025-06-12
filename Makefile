@@ -5,10 +5,10 @@
 ######################################################################
 
 CC = gcc
-CFLAGS = -std=c11 -O3 -g
+CFLAGS = -std=c11 -g
 CFLAGS += -Wall -Wextra -Wpedantic 
 CFLAGS += -Wno-unused-parameter -Wno-unused-variable
-CFLAGS += -Ilib/cglm/include -Ilib/glad/include -Ilib/glfw/include
+CFLAGS += -Ilib/cglm/include -Ilib/glad/include -Ilib/glfw/include -Ilib/stb
 LDFLAGS = lib/glad/src/glad.o lib/glfw/src/libglfw3.a
 LDFLAGS += lib/cglm/libcglm.a -lm -g
 
@@ -16,9 +16,9 @@ SRC = $(wildcard src/*.c) $(wildcard src/**/*.c)
 OBJ = $(SRC:.c=.o)
 BIN = bin
 
-.PHONY: all dirs clean run 
+.PHONY: build dirs clean cleanAll run 
 
-all: dirs libs out
+build: dirs libs out
 
 libs:
 	cd lib/glfw && cmake . && make
@@ -28,7 +28,7 @@ libs:
 dirs:
 	mkdir -p ./$(BIN)
 
-run: all
+run: build
 	$(BIN)/out
 
 out: $(OBJ)
@@ -40,4 +40,8 @@ out: $(OBJ)
 
 clean:
 	rm -rf bin/
+
+cleanAll:
+	rm -rf bin/
+	rm $(OBJ)
 

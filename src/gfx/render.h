@@ -10,9 +10,11 @@
 
 #include "gfx.h"
 #include "shader.h"
+#include "texture.h"
 
 struct Renderer {
         struct Shader shader;
+        struct Texture texture;
 
         GLuint vao;
         GLuint vbo;

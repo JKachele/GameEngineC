@@ -78,14 +78,15 @@ void shaderInit(struct Shader *self) {
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
 
-        self->shader = shader;
+        self->handle = shader;
+        glUseProgram(self->handle);
 }
 
-void shaderUpdate(struct Shader *self) {
-        glUseProgram(self->shader);
+void shaderUse(struct Shader *self) {
+        glUseProgram(self->handle);
 }
 
 void shaderDestroy(struct Shader *self) {
-        glDeleteProgram(self->shader);
+        glDeleteProgram(self->handle);
 }
 

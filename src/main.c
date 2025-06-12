@@ -6,7 +6,6 @@
  *License-------GNU GPL-3.0
  ************************************************/
 
-#include "gfx/shader.h"
 #include "state.h"
 #include "gfx/window.h"
 

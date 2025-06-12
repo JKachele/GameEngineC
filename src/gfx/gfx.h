@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#define CGLM_OMIT_NS_FROM_STRUCT_API
 #include <cglm/cglm.h>
 #include <cglm/struct.h>
 
