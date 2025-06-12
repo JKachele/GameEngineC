@@ -8,7 +8,10 @@
 
 #include "shader.h"
 
-static unsigned int compile(const char *path, GLenum type) {
+static const char *VERTEX_PATH = "assets/shaders/vert.glsl";
+static const char *FRAGMENT_PATH = "assets/shaders/frag.glsl";
+
+static unsigned int _compile(const char *path, GLenum type) {
         FILE *f;
         char *shaderSource;
         long len;
@@ -54,12 +57,11 @@ static unsigned int compile(const char *path, GLenum type) {
         return shaderHandle;
 }
 
-unsigned int compileShader(const char *vPath, const char *fPath) {
+void shaderInit(struct Shader *self) {
+        GLuint vertexShader = _compile(VERTEX_PATH, GL_VERTEX_SHADER);
+        GLuint fragmentShader = _compile(FRAGMENT_PATH, GL_FRAGMENT_SHADER);
 
-        unsigned int vertexShader = compile(vPath, GL_VERTEX_SHADER);
-        unsigned int fragmentShader = compile(fPath, GL_FRAGMENT_SHADER);
-
-        unsigned int shader = glCreateProgram();
+        GLuint shader = glCreateProgram();
         glAttachShader(shader, vertexShader);
         glAttachShader(shader, fragmentShader);
         glLinkProgram(shader);
@@ -76,6 +78,14 @@ unsigned int compileShader(const char *vPath, const char *fPath) {
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
 
-        return shader;
+        self->shader = shader;
+}
+
+void shaderUpdate(struct Shader *self) {
+        glUseProgram(self->shader);
+}
+
+void shaderDestroy(struct Shader *self) {
+        glDeleteProgram(self->shader);
 }
 

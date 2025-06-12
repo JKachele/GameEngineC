@@ -1,3 +1,9 @@
+# Binarys
+bin
+
+# clang cache
+.cache
+
 # Prerequisites
 *.d
 

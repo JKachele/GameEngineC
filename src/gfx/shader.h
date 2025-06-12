@@ -16,8 +16,15 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-unsigned int compileShader(const char *VertexFilePath,
-                           const char *fragmentFilePath);
+#include "gfx.h"
+
+struct Shader {
+        GLuint shader;
+};
+
+void shaderInit(struct Shader *self);
+void shaderUpdate(struct Shader *self);
+void shaderDestroy(struct Shader *self);
 
 #endif
 

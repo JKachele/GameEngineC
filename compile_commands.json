@@ -8,9 +8,9 @@
       "src/glad.o",
       "src/glad.c"
     ],
-    "directory": "/home/jkachele/Programming/CProjects/ChessEngine/lib/glad",
-    "file": "/home/jkachele/Programming/CProjects/ChessEngine/lib/glad/src/glad.c",
-    "output": "/home/jkachele/Programming/CProjects/ChessEngine/lib/glad/src/glad.o"
+    "directory": "/home/jkachele/Programming/CProjects/GameEngineC/lib/glad",
+    "file": "/home/jkachele/Programming/CProjects/GameEngineC/lib/glad/src/glad.c",
+    "output": "/home/jkachele/Programming/CProjects/GameEngineC/lib/glad/src/glad.o"
   },
   {
     "arguments": [
@@ -31,8 +31,31 @@
       "src/main.o",
       "src/main.c"
     ],
-    "directory": "/home/jkachele/Programming/CProjects/ChessEngine",
-    "file": "/home/jkachele/Programming/CProjects/ChessEngine/src/main.c",
-    "output": "/home/jkachele/Programming/CProjects/ChessEngine/src/main.o"
+    "directory": "/home/jkachele/Programming/CProjects/GameEngineC",
+    "file": "/home/jkachele/Programming/CProjects/GameEngineC/src/main.c",
+    "output": "/home/jkachele/Programming/CProjects/GameEngineC/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-std=c11",
+      "-O3",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Wno-unused-parameter",
+      "-Wno-unused-variable",
+      "-Ilib/cglm/include",
+      "-Ilib/glad/include",
+      "-Ilib/glfw/include",
+      "-o",
+      "src/render/shader.o",
+      "src/render/shader.c"
+    ],
+    "directory": "/home/jkachele/Programming/CProjects/GameEngineC",
+    "file": "/home/jkachele/Programming/CProjects/GameEngineC/src/render/shader.c",
+    "output": "/home/jkachele/Programming/CProjects/GameEngineC/src/render/shader.o"
   }
 ]
