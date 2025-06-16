@@ -29,6 +29,7 @@ void createWindow(WinFunc init, WinFunc render, WinFunc destroy) {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
         window.size = (ivec2s){{800, 600}};
         window.handle = glfwCreateWindow(window.size.x, window.size.y,
@@ -55,7 +56,7 @@ void windowLoop(void) {
 
                 // Clear Window
                 glClearColor(0.314f, 0.0f, 0.0f, 1.0f);
-                glClear(GL_COLOR_BUFFER_BIT);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 // Rendering happens here
                 window.render();
