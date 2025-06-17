@@ -16,7 +16,9 @@ SRC = $(wildcard src/*.c) $(wildcard src/**/*.c)
 OBJ = $(SRC:.c=.o)
 BIN = bin
 
-.PHONY: build dirs clean cleanAll run 
+TEST = test/test.c
+
+.PHONY: build dirs clean cleanAll run runTest
 
 build: dirs libs out
 
@@ -37,6 +39,12 @@ out: $(OBJ)
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
+
+runTest: test
+	$(BIN)/test
+
+test: dirs
+	$(CC) -o $(BIN)/test $(TEST) -lm -g
 
 clean:
 	rm -rf bin/

@@ -16,6 +16,14 @@ struct Window {
         GLFWwindow *handle;
         ivec2s size;
 
+        // Timing variables
+        float deltaTime;
+        float lastFrame;
+
+        // Keys
+        bool keysPressed[350];
+        bool keysPressedOnce[350];
+
         WinFunc init;
         WinFunc render;
         WinFunc destroy;

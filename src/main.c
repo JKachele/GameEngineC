@@ -23,6 +23,7 @@ void render(void) {
 
 void destroy(void) {
         renderDestroy(&state.renderer);
+        printf("\nGoodbye!\n");
 }
 
 int main(void) {

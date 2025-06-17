@@ -11,10 +11,12 @@
 #include "gfx.h"
 #include "shader.h"
 #include "texture.h"
+#include "camera.h"
 
 struct Renderer {
         struct Shader shader;
         struct Texture texture;
+        struct Camera camera;
 
         GLuint vao;
         GLuint vbo;

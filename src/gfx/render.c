@@ -125,20 +125,24 @@ void renderInit(struct Renderer *self) {
 
         shaderInit(&self->shader);
         textureInit(&self->texture);
+        cameraInit(&self->camera);
 
         glUniform1i(glGetUniformLocation(self->shader.handle, "Tex0"), 0);
-        glUniform1i(glGetUniformLocation(self->shader.handle, "Tex1"), 1);
+        // glUniform1i(glGetUniformLocation(self->shader.handle, "Tex1"), 1);
 }
 
-void createTransformations(GLuint shaderHandle) {
+void createTransformations(struct Renderer *self) {
+        struct Camera *cam = &self->camera;
         mat4s view = mat4_identity();
-        view = glms_translate(view, (vec3s){{0.0f, 0.0f, -3.0f}});
-        GLuint viewLoc = glGetUniformLocation(shaderHandle, "view");
+        view = cam->getView(cam);
+
+        GLuint viewLoc = glGetUniformLocation(self->shader.handle, "view");
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, (const GLfloat*)&view.raw);
 
         mat4s projection = mat4_identity();
-        projection = glms_perspective(glm_rad(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-        GLuint projLoc = glGetUniformLocation(shaderHandle, "projection");
+        projection = glms_perspective(glm_rad(self->camera.fov),
+                        800.0f / 600.0f, 0.1f, 100.0f);
+        GLuint projLoc = glGetUniformLocation(self->shader.handle, "projection");
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, (const GLfloat*)&projection.raw);
 }
 
@@ -159,8 +163,9 @@ void renderBoxes(GLuint shaderHandle) {
         for(unsigned int i = 0; i < 10; i++) {
                 mat4s model = mat4_identity();
                 model = glms_translate(model, cubePositions[i]);
-                float angle = 20.0f * (i % 3);
-                model = glms_rotate(model, (float)glfwGetTime() * glm_rad(angle),
+                float angle = 20.0f * (i + 1);
+                angle *= (float)glfwGetTime();
+                model = glms_rotate(model, glm_rad(angle),
                                 (vec3s){{1.0f, 0.3f, 0.5f}});
                 GLuint modelLoc = glGetUniformLocation(shaderHandle, "model");
                 glUniformMatrix4fv(modelLoc, 1, GL_FALSE, (const GLfloat*)&model.raw);
@@ -175,10 +180,10 @@ void renderUpdate(struct Renderer *self) {
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, self->texture.handle0);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, self->texture.handle1);
+        // glActiveTexture(GL_TEXTURE1);
+        // glBindTexture(GL_TEXTURE_2D, self->texture.handle1);
 
-        createTransformations(self->shader.handle);
+        createTransformations(self);
 
         glBindVertexArray(self->vao);
         // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
