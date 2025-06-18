@@ -12,6 +12,13 @@
 
 typedef void (*WinFunc)(void);
 
+struct Mouse {
+        double posX;
+        double posY;
+        double scrollX;
+        double scrollY;
+};
+
 struct Window {
         GLFWwindow *handle;
         ivec2s size;
@@ -19,6 +26,8 @@ struct Window {
         // Timing variables
         float deltaTime;
         float lastFrame;
+
+        struct Mouse mouse;
 
         // Keys
         bool keysPressed[350];

@@ -9,6 +9,7 @@
 #define CAMERA_H
 
 #include "gfx.h"
+#include "window.h"
 
 struct Camera {
         vec3s pos;
@@ -24,7 +25,7 @@ struct Camera {
 };
 
 void cameraInit(struct Camera *self);
-void moveCamera(struct Camera *self, float deltaTime, bool *keysPressed);
+void updateCamera(struct Camera *self);
 
 #endif
 

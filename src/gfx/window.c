@@ -18,48 +18,15 @@ static void _sizeCallback(GLFWwindow *windowHandle, int width, int height) {
         glViewport(0, 0, width, height);
 }
 
-static void _mouseCallback(GLFWwindow *windowHandle, double xPos, double yPos) {
-        struct Camera *cam = &state.renderer.camera;
-        const float sensitivity = 0.1f;
-        static float lastX = 400;
-        static float lastY = 300;
-        static bool firstMouse = true;
-
-        if (firstMouse) {
-                lastX = xPos;
-                lastY = yPos;
-                firstMouse = false;
-        }
-
-        float xOffset = (xPos - lastX) * sensitivity;
-        float yOffset = (lastY - yPos) * sensitivity;
-        lastX = xPos;
-        lastY = yPos;
-
-        cam->yaw += xOffset;
-        cam->pitch += yOffset;
-        if (cam->pitch > 89.0f)
-                cam->pitch = 89.0f;
-        if (cam->pitch < -89.0f)
-                cam->pitch = -89.0f;
-
-        // printf("Pitch: %f\nYaw: %f\n\n", cam->pitch, cam->yaw);
-
-        vec3s direction;
-        direction.x = cos(glm_rad(cam->yaw)) * cos(glm_rad(cam->pitch));
-        direction.y = sin(glm_rad(cam->pitch));
-        direction.z = sin(glm_rad(cam->yaw)) * cos(glm_rad(cam->pitch));
-        cam->front = glms_normalize(direction);
+static void _mouseCallback(GLFWwindow *windowHandle, double posX, double posY) {
+        window.mouse.posX = posX;
+        window.mouse.posY = posY;
 }
 
 static void _scrollCallback(GLFWwindow *windowHandle,
                 double xOffset, double yOffset) {
-        struct Camera *cam = &state.renderer.camera;
-        cam->fov -= (float)yOffset;
-        if (cam->fov < 1.0f)
-                cam->fov = 1.0f;
-        if (cam->fov > 45.0f)
-                cam->fov = 45.0f;
+        window.mouse.scrollX = xOffset;
+        window.mouse.scrollY = yOffset;
 }
 
 static void _keyCallback(GLFWwindow *windowHandle, int key,
@@ -154,8 +121,7 @@ void windowLoop(void) {
                 _printFPS();
 
                 // Rendering happens here
-                moveCamera(&state.renderer.camera, window.deltaTime,
-                                window.keysPressed);
+                updateCamera(&state.renderer.camera);
                 window.render();
 
                 // Check and call events and swap buffers

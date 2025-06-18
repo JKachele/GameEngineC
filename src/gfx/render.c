@@ -128,7 +128,7 @@ void renderInit(struct Renderer *self) {
         cameraInit(&self->camera);
 
         glUniform1i(glGetUniformLocation(self->shader.handle, "Tex0"), 0);
-        // glUniform1i(glGetUniformLocation(self->shader.handle, "Tex1"), 1);
+        glUniform1i(glGetUniformLocation(self->shader.handle, "Tex1"), 1);
 }
 
 void createTransformations(struct Renderer *self) {
@@ -180,8 +180,8 @@ void renderUpdate(struct Renderer *self) {
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, self->texture.handle0);
-        // glActiveTexture(GL_TEXTURE1);
-        // glBindTexture(GL_TEXTURE_2D, self->texture.handle1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, self->texture.handle1);
 
         createTransformations(self);
 
